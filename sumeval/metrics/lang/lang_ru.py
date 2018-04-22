@@ -1,5 +1,7 @@
 import re
 from sumeval.metrics.lang.base_lang import BaseLang
+from nltk.stem.snowball import SnowballStemmer
+
 
 
 class LangRU(BaseLang):
@@ -10,6 +12,8 @@ class LangRU(BaseLang):
         super(LangRU, self).__init__("ru")
         self._symbol_replace = re.compile(r"[^А-Яа-яA-Za-z0-9-]")
         self._valid_word = re.compile(r"^[А-Яа-яA-Za-z0-9$]")
+        self.stemmer = SnowballStemmer("russian")
+
 
     def tokenize(self, text):
         _txt = self._format_text(text)
@@ -37,3 +41,6 @@ class LangRU(BaseLang):
 
         bes = [be for be in bes if is_valid(be)]
         return bes
+
+    def stemming(self, word, min_length=-1):
+        return self.stemmer.stem(word)

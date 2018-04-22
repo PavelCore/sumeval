@@ -24,7 +24,7 @@ class RougeCalculator():
             target text or tokenized words
         is_reference: bool
             for reference process or not
-        
+
         See Also
         --------
         https://github.com/andersjo/pyrouge/blob/master/tools/ROUGE-1.5.5/ROUGE-1.5.5.pl#L1820
@@ -33,7 +33,7 @@ class RougeCalculator():
         # tokenization
         if isinstance(words, str):
             if self.tokenizer:
-                words = self.tokenizer.tokenize(text_or_words)
+                words = self.tokenizer(text_or_words)
             else:
                 words = self.lang.tokenize(text_or_words)
 
@@ -61,7 +61,7 @@ class RougeCalculator():
 
             # min_length ref
             # https://github.com/andersjo/pyrouge/blob/master/tools/ROUGE-1.5.5/ROUGE-1.5.5.pl#L2629
-            words = [self.lang.stemming(w, min_length=3) for w in words]
+            words = [self.lang.stemming(w, min_length=1) for w in words]
 
         return words
 
@@ -120,7 +120,7 @@ class RougeCalculator():
             alpha -> 0: recall is more important
             alpha -> 1: precision is more important
             F = 1/(alpha * (1/P) + (1 - alpha) * (1/R))
-        
+
         Returns
         -------
         f1: float
@@ -187,7 +187,7 @@ class RougeCalculator():
             alpha -> 0: recall is more important
             alpha -> 1: precision is more important
             F = 1/(alpha * (1/P) + (1 - alpha) * (1/R))
-        
+
         Returns
         -------
         f1: float
@@ -232,7 +232,7 @@ class RougeCalculator():
             alpha -> 0: recall is more important
             alpha -> 1: precision is more important
             F = 1/(alpha * (1/P) + (1 - alpha) * (1/R))
-        
+
         Returns
         -------
         f1: float
