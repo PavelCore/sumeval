@@ -55,9 +55,7 @@ class RougeCalculator():
         if self.stopwords:
             words = [w for w in words if not self.lang.is_stop_word(w)]
 
-        if self.stemming and is_reference:
-            # stemming is only adopted to reference
-            # https://github.com/andersjo/pyrouge/blob/master/tools/ROUGE-1.5.5/ROUGE-1.5.5.pl#L1416
+        if self.stemming:
 
             # min_length ref
             # https://github.com/andersjo/pyrouge/blob/master/tools/ROUGE-1.5.5/ROUGE-1.5.5.pl#L2629
